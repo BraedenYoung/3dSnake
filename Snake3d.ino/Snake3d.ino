@@ -9,7 +9,7 @@ int playerX = 1;
 int playerY = 1;
 
 // max length of 10, reset if greater
-int tail[][3] = {{1,1,1},{1,2,1},{1,3,1},{1,0,1},{1,1,1},{1,1,1},{1,1,1},{1,1,1},{1,1,1},{1,1,1}};
+int tail[][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 int playerLength = 2;
 
 int playerSpeed = 5;
@@ -38,8 +38,8 @@ void loop()
   //player
   movePlayerHead();
  
-  Rb.setPixelZXY(playerZ, playerX, playerY, 0, 0, 0xFF); //uses R, G and B color bytes
   paintTail();
+  Rb.setPixelZXY(playerZ, playerX, playerY, 0, 0, 0xFF); //uses R, G and B color bytes
 
   //food
   Rb.setPixelZXY(pellet[0], pellet[1], pellet[2], random(0xFF), random(0xFF), random(0xFF)); //uses R, G and B color bytes
@@ -141,9 +141,9 @@ void checkCollision()
 
   // check tail collision
   unsigned int x;
-  for (x = playerLength; x > 0; --x)
+  for (x = 0; x < playerLength; ++x)
   {
-    if (playerZ == tail[x][0] && playerX == tail[x][0] && playerY == tail[x][0] ) 
+    if (playerZ == tail[x][0] && playerX == tail[x][1] && playerY == tail[x][2] ) 
     {
       gameOver();
     }
